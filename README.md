@@ -13,16 +13,17 @@ This application is a modern variant of a demo by Java Techie (https://www.youtu
 - separate restcontroller class 
 
 The jaxb-maven-plugin will compile loaneligibility.wsdl into fully annotated java classes. 
-Note that this wsdl is not generated from a xsd schema (as was the case in project springboot3-soap-server), but stored in the resources folder.
+Note that this wsdl is not generated from a xsd schema (as was the case in project springboot3-soap-server), but stored as a source file in the resources folder.
 
+# running the app
 
+1. make sure the server side app runs
+2. start the client app from the IDE or as follows:
+```cmd
+./mvnw spring-boot:run
+```
 
-# view wsdl
-
-Spring Boot generates a WSDL based on the XSD, so no need to create one by hand.
-Url: http://localhost:8080/ws/loanEligibility.wsdl
-
-# testberichten
+# test messages
 
 The http-tests directory contains two XML test messages.
 These messages can be send to a running application with file tests.http.
@@ -30,6 +31,6 @@ In IntelliJ Ultimate, the tests can be started with the built-in HTTP client usi
 
 From the CLI, the test messages can be sent as requests using curl:
 ```curl
-curl -v -X POST -H "Content-Type: application/json" --data @http-tests/approved.json http://localhost:9090/getLoanStatus
-curl -v -X POST -H "Content-Type: application/json" --data @http-tests/denied.json http://localhost:9090/getLoanStatus
+$ curl -v -X POST -H "Content-Type: application/json" --data @http-tests/approved.json http://localhost:9090/getLoanStatus
+$ curl -v -X POST -H "Content-Type: application/json" --data @http-tests/denied.json http://localhost:9090/getLoanStatus
 ```
